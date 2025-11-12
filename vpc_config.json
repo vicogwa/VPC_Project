@@ -1,0 +1,86 @@
+{
+  "vpcs": {
+    "vpc1": {
+      "cidr": "10.0.0.0/16",
+      "bridge": "vpc-vpc1",
+      "bridge_ips": {
+        "public-1": "10.0.1.1",
+        "private-1": "10.0.2.1"
+      },
+      "subnets": {
+        "public-1": {
+          "cidr": "10.0.1.0/24",
+          "type": "public",
+          "namespace": "public-1",
+          "ip": "10.0.1.2",
+          "gateway_ip": "10.0.1.1",
+          "veth_pair": [
+            "veth0",
+            "vbr0"
+          ]
+        },
+        "private-1": {
+          "cidr": "10.0.2.0/24",
+          "type": "private",
+          "namespace": "private-1",
+          "ip": "10.0.2.2",
+          "gateway_ip": "10.0.2.1",
+          "veth_pair": [
+            "veth1",
+            "vbr1"
+          ]
+        }
+      },
+      "nat_gateway": {
+        "interface": "eth0",
+        "public_subnets": [
+          "10.0.1.0/24"
+        ]
+      },
+      "workloads": {
+        "public-1": {
+          "port": 8080,
+          "pid": "unknown",
+          "ip": "10.0.1.2"
+        },
+        "private-1": {
+          "port": 8081,
+          "pid": "unknown",
+          "ip": "10.0.2.2"
+        }
+      }
+    },
+    "vpc2": {
+      "cidr": "10.1.0.0/16",
+      "bridge": "vpc-vpc2",
+      "bridge_ips": {
+        "public-2": "10.1.1.1"
+      },
+      "subnets": {
+        "public-2": {
+          "cidr": "10.1.1.0/24",
+          "type": "public",
+          "namespace": "public-2",
+          "ip": "10.1.1.2",
+          "gateway_ip": "10.1.1.1",
+          "veth_pair": [
+            "veth2",
+            "vbr2"
+          ]
+        }
+      },
+      "nat_gateway": null,
+      "workloads": {}
+    }
+  },
+  "peerings": [
+    {
+      "vpc1": "vpc1",
+      "vpc2": "vpc2",
+      "veth_pair": [
+        "peervpc11",
+        "peervpc22"
+      ]
+    }
+  ]
+}

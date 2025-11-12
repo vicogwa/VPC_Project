@@ -1,0 +1,17 @@
+{
+  "private-1": {
+    "subnet": "10.0.2.0/24",
+    "ingress": [
+      {
+        "port": 8081,
+        "protocol": "tcp",
+        "action": "allow"
+      },
+      {
+        "port": 22,
+        "protocol": "tcp",
+        "action": "deny"
+      }
+    ]
+  }
+}
